@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.sagacity.framework</groupId>
+    <artifactId>sagacity-framework</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>sagacity-framework</name>
+    <packaging>pom</packaging>
+    <description>Demo project for Spring Boot</description>
+
+
+    <modules>
+        <module>sagacity-framework-api</module>
+        <module>sagacity-framework-jdbc</module>
+        <module>sagacity-framework-service</module>
+        <module>sagacity-framework-util</module>
+        <module>sagacity-framework-web</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <redisson-spring-boot.version>3.13.1</redisson-spring-boot.version>
+        <sagacity-framework.version>0.0.1-SNAPSHOT</sagacity-framework.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sagacity.framework</groupId>
+                <artifactId>sagacity-framework-api</artifactId>
+                <version>${sagacity-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sagacity.framework</groupId>
+                <artifactId>sagacity-framework-util</artifactId>
+                <version>${sagacity-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot.version}</version>
+            </dependency>
+            <!-- swagger-annotations -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.3.8</version>
+            </dependency>
+
+
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
+</project>
