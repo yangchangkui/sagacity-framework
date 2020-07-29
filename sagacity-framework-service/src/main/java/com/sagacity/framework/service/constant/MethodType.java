@@ -16,6 +16,7 @@
 package com.sagacity.framework.service.constant;
 
 /**
+ * 方法类型
  * @author xingyun
  * @date 2020-07-11 13:54
  */

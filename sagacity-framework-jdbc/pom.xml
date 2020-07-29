@@ -46,6 +46,14 @@
             <artifactId>sagacity-framework-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sagacity.framework</groupId>
+            <artifactId>sagacity-framework-util</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

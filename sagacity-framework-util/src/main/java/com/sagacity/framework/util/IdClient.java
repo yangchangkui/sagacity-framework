@@ -36,6 +36,14 @@ public class IdClient {
      * 下个ID，默认12开头
      * @return id
      */
+    public static String nextIdStr(){
+        return String.valueOf(idWorker.nextId(12));
+    }
+
+    /**
+     * 下个ID，默认12开头
+     * @return id
+     */
     public static Long nextId(){
         return idWorker.nextId(12);
     }
@@ -86,7 +94,7 @@ public class IdClient {
                 }
             }
         } catch (Exception e) {
-            log.warn(" getDatacenterId: " + e.getMessage());
+            log.warn("getDatacenterId: " + e.getMessage());
         }
         return id;
     }

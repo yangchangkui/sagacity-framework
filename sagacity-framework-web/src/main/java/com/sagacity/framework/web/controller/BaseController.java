@@ -91,4 +91,11 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         resp.setData(service.search(paginationRequest)).ok();
         return resp;
     }
+
+    @Override
+    public void export(T entity) {
+        service.export(entity);
+    }
+
+
 }

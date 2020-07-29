@@ -17,15 +17,21 @@ package com.sagacity.framework.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sagacity.framework.jdbc.BaseMapper;
 import com.sagacity.framework.service.constant.MethodType;
+import com.sagacity.framework.util.ExcelUtils;
 import com.sagacity.framework.util.IdClient;
+import com.sagacity.framework.util.RequestUtil;
 import com.sagacity.framework.util.UserInfoUtil;
 import com.sagacity.framework.web.model.request.PaginationRequest;
-import com.sagacity.framework.jdbc.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -121,6 +127,39 @@ public abstract class BaseService<M extends BaseMapper<T>,T> implements IService
         List<T> tList = mapper.search(paginationRequest);
         return PageInfo.of(tList);
     }
+
+
+    /**
+     * 根据 entity 或 generalConditions 条件，分页查询数据
+     * @param entity 分页查询条件
+     */
+    public void export(T entity) {
+        List<T> list = selectList(entity);
+        ExcelWriter excelWriter = ExcelUtils.getExcelWriter(null);
+        excelWriter.write(list);
+        HttpServletResponse response = RequestUtil.getResponse();
+        // 设置 Excel 响应头
+        setExcelResponseHeaders(response);
+        ServletOutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        excelWriter.flush(outputStream,true);
+
+    }
+
+    private void setExcelResponseHeaders(HttpServletResponse response){
+        String fileName = IdClient.nextIdStr() + ExcelUtils.XLSX_SUFFIX;
+        // 下面几行是为了解决文件名乱码的问题
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+    }
+
 
     /**
      * 设置默认值

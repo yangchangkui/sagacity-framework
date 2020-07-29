@@ -18,6 +18,7 @@ package com.sagacity.framework.service;
 import com.github.pagehelper.PageInfo;
 import com.sagacity.framework.web.model.request.PaginationRequest;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -84,4 +85,10 @@ public interface IService<T> {
      */
     PageInfo<T> search(PaginationRequest<T> paginationRequest);
 
+
+    /**PaginationRequest
+     * 根据 entity 或 generalConditions 条件，分页查询数据 导出
+     * @param entity 分页查询条件 导出
+     */
+    void export(T entity);
 }

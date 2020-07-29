@@ -90,4 +90,12 @@ public interface BaseRemoteService<T> {
      */
     @PostMapping(value = "/search")
     ResponseEntity<PageInfo<T>> search(@RequestBody PaginationRequest<T> paginationRequest);
+
+    /**
+     * 根据 entity 或 generalConditions 条件，分页查询数据 导出
+     * @param entity 分页查询条件 导出
+     */
+    @GetMapping(value = "/export")
+    void export(T entity);
+
 }
