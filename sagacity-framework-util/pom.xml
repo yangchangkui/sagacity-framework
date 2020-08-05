@@ -13,7 +13,6 @@
     <description>sagacity-framework工具类</description>
 
     <dependencies>
-
         <!-- POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -37,12 +36,7 @@
         <dependency>
             <groupId>com.sagacity.framework</groupId>
             <artifactId>sagacity-framework-api</artifactId>
+            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.2.7.RELEASE</version>
-        </dependency>
-
     </dependencies>
 </project>

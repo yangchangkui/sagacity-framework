@@ -27,6 +27,7 @@ import com.sagacity.framework.util.IdClient;
 import com.sagacity.framework.util.RequestUtil;
 import com.sagacity.framework.util.UserInfoUtil;
 import com.sagacity.framework.web.model.request.PaginationRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletOutputStream;
@@ -39,6 +40,7 @@ import java.util.List;
  * @author xingyun
  * @date 2020-07-04 12:58
  */
+@Slf4j
 public abstract class BaseService<M extends BaseMapper<T>,T> implements IService<T> {
 
     @Autowired
@@ -144,6 +146,7 @@ public abstract class BaseService<M extends BaseMapper<T>,T> implements IService
         try {
             outputStream = response.getOutputStream();
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 

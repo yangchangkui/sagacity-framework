@@ -16,7 +16,6 @@
 package com.sagacity.framework.web.controller.exception;
 
 import com.sagacity.framework.web.constant.ResponseCode;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * 应用异常，用于业务异常抛出，全局捕获
