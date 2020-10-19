@@ -16,9 +16,8 @@
 package com.sagacity.framework.service;
 
 import com.github.pagehelper.PageInfo;
-import com.sagacity.framework.web.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.request.PaginationRequest;
 
-import java.io.IOException;
 import java.util.List;
 
 /**

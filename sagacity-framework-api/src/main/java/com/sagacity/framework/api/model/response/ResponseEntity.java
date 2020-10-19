@@ -13,26 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.request;
+package com.sagacity.framework.api.model.response;
 
+import com.sagacity.framework.api.constant.ResponseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
  * @author xingyun
- * @date 2020-07-05 13:17
+ * @date 2020-07-04 14:13
  */
 @Data
-@ApiModel(description = "请求业务实体")
-public class GenericBO {
+@ApiModel(description = "响应对象")
+public class ResponseEntity<T> {
+    @ApiModelProperty("响应码")
+    private String code;
 
-    @ApiModelProperty("id列表")
-    @NotNull(message = "id不能为空")
-    private List<Long> idList;
+    @ApiModelProperty("响应消息")
+    private String msg;
+
+    private T data;
+
+    public void ok(){
+        this.code = ResponseCode.SUCCESS.getCode();
+        this.msg = ResponseCode.SUCCESS.getMsg();
+    }
+
+    public void fail(){
+        this.code = ResponseCode.FAIL.getCode();
+        this.msg = ResponseCode.FAIL.getMsg();
+    }
+
+    public ResponseEntity<T> setData(T data){
+        this.data = data;
+        return this;
+    }
 
 }

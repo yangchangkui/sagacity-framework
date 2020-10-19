@@ -16,7 +16,7 @@
 package com.sagacity.framework.util;
 
 
-import com.sagacity.framework.web.model.UserInfo;
+import com.sagacity.framework.api.model.UserInfo;
 
 /**
  * @author xingyun

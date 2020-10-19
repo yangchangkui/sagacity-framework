@@ -13,29 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model;
+package com.sagacity.framework.api.constant;
 
-import lombok.Data;
+import sun.tools.tree.Vset;
 
 /**
- * 请求头封装类
+ * 响应码枚举
  * @author xingyun
- * @date 2020-07-11 19:39
+ * @date 2020-07-04 14:17
  */
-@Data
-public class UserInfo {
-    /**
-     * 用户姓名
-     */
-    private String name;
+public enum ResponseCode {
+    SUCCESS("0000","success"),
+    FAIL("0001","fail"),
+    ERROR("0003","error"),
+    ARGUMENT_EMPTY("0004","参数为空"),
+    ;
 
-    /**
-     * 账号
-     */
-    private String account;
+    private final String code;
+    private final String msg;
 
-    /**
-     * traceId
-     */
-    private String traceId;
+    ResponseCode(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
 }

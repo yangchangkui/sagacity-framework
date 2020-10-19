@@ -13,38 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.constant;
+package com.sagacity.framework.api.model.request;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
- * API模块的常量
  * @author xingyun
- * @date 2020-07-04 13:49
+ * @date 2020-07-05 13:17
  */
-public final class ApiConstants {
-    private ApiConstants(){}
+@Data
+@ApiModel(description = "请求业务实体")
+public class GenericBO {
 
-    /**
-     * 空字符串
-     */
-    public static final String STR_EMPTY = "";
+    @ApiModelProperty("id列表")
+    @NotNull(message = "id不能为空")
+    private List<Long> idList;
 
-    /**
-     * 前缀
-     */
-    public static final String CRITERION_PREFIX = "(";
-
-    /**
-     * 后缀
-     */
-    public static final String CRITERION_SUFFIX = ")";
-
-    /**
-     * 关联条件-OR
-     */
-    public static final String CONNECT_OR = "OR";
-
-    /**
-     * 关联条件-AND
-     */
-    public static final String CONNECT_AND = "AND";
 }

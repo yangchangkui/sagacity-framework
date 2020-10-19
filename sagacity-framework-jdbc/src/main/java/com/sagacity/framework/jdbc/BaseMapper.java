@@ -15,7 +15,7 @@
  */
 package com.sagacity.framework.jdbc;
 
-import com.sagacity.framework.web.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.request.PaginationRequest;
 
 import java.util.List;
 

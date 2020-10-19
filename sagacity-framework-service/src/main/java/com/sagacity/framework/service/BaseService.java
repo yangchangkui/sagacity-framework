@@ -20,13 +20,14 @@ import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sagacity.framework.exception.AppException;
 import com.sagacity.framework.jdbc.BaseMapper;
 import com.sagacity.framework.service.constant.MethodType;
 import com.sagacity.framework.util.ExcelUtils;
 import com.sagacity.framework.util.IdClient;
 import com.sagacity.framework.util.RequestUtil;
 import com.sagacity.framework.util.UserInfoUtil;
-import com.sagacity.framework.web.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.request.PaginationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,6 +35,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static com.sagacity.framework.api.constant.ResponseCode.ERROR;
 
 /**
  * 基础服务公共方法
@@ -146,14 +149,16 @@ public abstract class BaseService<M extends BaseMapper<T>,T> implements IService
         try {
             outputStream = response.getOutputStream();
         } catch (IOException e) {
-
-            e.printStackTrace();
+            log.error("export get outputStream error",e);
+            throw new AppException(ERROR);
         }
-
         excelWriter.flush(outputStream,true);
-
     }
 
+    /**
+     * 设置响应头
+     * @param response
+     */
     private void setExcelResponseHeaders(HttpServletResponse response){
         String fileName = IdClient.nextIdStr() + ExcelUtils.XLSX_SUFFIX;
         // 下面几行是为了解决文件名乱码的问题

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.request;
+package com.sagacity.framework.api.model.request;
 
-import com.sagacity.framework.web.constant.ApiConstants;
+import com.sagacity.framework.api.constant.ApiConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

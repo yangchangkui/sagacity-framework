@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.controller;
+package com.sagacity.framework.api.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.sagacity.framework.service.IService;
-import com.sagacity.framework.web.model.request.GenericBO;
-import com.sagacity.framework.web.model.request.PaginationRequest;
-import com.sagacity.framework.web.model.response.ResponseEntity;
-import com.sagacity.framework.web.service.BaseRemoteService;
+import com.sagacity.framework.api.model.request.GenericBO;
+import com.sagacity.framework.api.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.response.ResponseEntity;
+import com.sagacity.framework.api.service.BaseRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.controller.handler;
+package com.sagacity.framework.api.controller.handler;
 
-import com.sagacity.framework.web.constant.ResponseCode;
-import com.sagacity.framework.web.controller.exception.AppException;
-import com.sagacity.framework.web.model.response.ResponseEntity;
+import com.sagacity.framework.api.constant.ResponseCode;
+import com.sagacity.framework.api.model.response.ResponseEntity;
+import com.sagacity.framework.exception.AppException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,13 +37,13 @@ public class GlobalExceptionHandler {
         if(e instanceof AppException){
             AppException ae = (AppException) e;
             resp.setCode(ae.getCode());
-            resp.setMessage(ae.getMessage());
+            resp.setMsg(ae.getMsg());
 
             // 参数校验异常
         }else if(e instanceof MethodArgumentNotValidException){
             MethodArgumentNotValidException me = (MethodArgumentNotValidException) e;
             String defaultMessage = me.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-            resp.setMessage(defaultMessage);
+            resp.setMsg(defaultMessage);
             resp.setCode(ResponseCode.ARGUMENT_EMPTY.getCode());
 
             // 其他类型异常

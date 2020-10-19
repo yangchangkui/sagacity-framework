@@ -13,25 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.request;
+package com.sagacity.framework.api.model.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * 通用查询实体
+ * 分页查询请求实体
  * @author xingyun
- * @date 2020-07-04 13:32
+ * @date 2020-07-04 13:19
  */
 @Data
-@ApiModel(description = "通用查询实体")
-public class GeneralConditions {
+@ApiModel(description = "分页查询请求实体")
+public class PaginationRequest<T> {
+    @ApiModelProperty("简单查询实体")
+    private T entity;
 
-    @ApiModelProperty("查询条件列表")
-    private List<Criterion> criteria;
+    @ApiModelProperty("通用查询实体")
+    private GeneralConditions generalConditions;
 
+    @ApiModelProperty("页数")
+    private int pageNum;
 
+    @ApiModelProperty("每页条数")
+    private int pageSize;
 }

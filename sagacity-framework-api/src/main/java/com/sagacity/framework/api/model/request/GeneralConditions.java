@@ -13,41 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.response;
+package com.sagacity.framework.api.model.request;
 
-import com.sagacity.framework.web.constant.ResponseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
+ * 通用查询实体
  * @author xingyun
- * @date 2020-07-04 14:13
+ * @date 2020-07-04 13:32
  */
 @Data
-@ApiModel(description = "响应对象")
-public class ResponseEntity<T> {
-    @ApiModelProperty("响应码")
-    private String code;
+@ApiModel(description = "通用查询实体")
+public class GeneralConditions {
 
-    @ApiModelProperty("响应消息")
-    private String message;
+    @ApiModelProperty("查询条件列表")
+    private List<Criterion> criteria;
 
-    private T data;
-
-    public void ok(){
-        this.code = ResponseCode.SUCCESS.getCode();
-        this.message = ResponseCode.SUCCESS.getMessage();
-    }
-
-    public void fail(){
-        this.code = ResponseCode.FAIL.getCode();
-        this.message = ResponseCode.FAIL.getMessage();
-    }
-
-    public ResponseEntity<T> setData(T data){
-        this.data = data;
-        return this;
-    }
 
 }
