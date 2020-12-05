@@ -47,4 +47,22 @@ public final class ApiConstants {
      * 关联条件-AND
      */
     public static final String CONNECT_AND = "AND";
+
+
+    /**
+     * 关联条件-LIKE
+     */
+    public static final String CONDITION_LIKE = "LIKE";
+    /**
+     * 关联条件-等于、不等于、大于、大于等于、小于、小于等于
+     */
+    public static final String CONDITION_EQ = "=";
+    public static final String CONDITION_NEQ = "!=";
+    public static final String CONDITION_GT = ">";
+    public static final String CONDITION_GTE = ">=";
+    public static final String CONDITION_LT = "<";
+    public static final String CONDITION_LTE = "<=";
+
+
+
 }
