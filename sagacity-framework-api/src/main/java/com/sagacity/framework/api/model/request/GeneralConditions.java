@@ -13,39 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.request;
+package com.sagacity.framework.api.model.request;
 
-import com.sagacity.framework.web.constant.ApiConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
- * 查询条件
+ * 通用查询实体
  * @author xingyun
- * @date 2020-07-04 13:37
+ * @date 2020-07-04 13:32
  */
 @Data
-@ApiModel(description = "查询条件")
-public class Criterion {
-    /**
-     * 实体对象字段或者表字段都可以
-     */
-    @ApiModelProperty("字段")
-    private String field;
+@ApiModel(description = "通用查询实体")
+public class GeneralConditions {
 
-    @ApiModelProperty("字段值")
-    private Object value;
+    @ApiModelProperty("查询条件列表")
+    private List<Criterion> criteria;
 
-    @ApiModelProperty("条件（>、>=、in、like等）")
-    private String condition;
 
-    @ApiModelProperty("前缀")
-    private String prefix = ApiConstants.CRITERION_PREFIX;
-
-    @ApiModelProperty("后缀")
-    private String suffix = ApiConstants.CRITERION_SUFFIX;
-
-    @ApiModelProperty("条件关联（OR、AND）")
-    private String connect;
 }

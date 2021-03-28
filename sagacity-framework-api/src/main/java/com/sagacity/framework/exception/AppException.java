@@ -13,33 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.constant;
+package com.sagacity.framework.exception;
+
+import com.sagacity.framework.api.constant.ResponseCode;
 
 /**
- * 响应码枚举
+ * 程序异常类
  * @author xingyun
- * @date 2020-07-04 14:17
+ * @date 2020-10-19 15:36
  */
-public enum ResponseCode {
-    SUCCESS("0000","success"),
-    FAIL("0001","fail"),
-    ERROR("0003","error"),
-    ARGUMENT_EMPTY("0004","参数为空"),
-    ;
+public class AppException extends RuntimeException {
+    private String code;
+    private String msg;
 
-    private final String code;
-    private final String message;
+    public AppException(ResponseCode responseCode){
+        super(responseCode.getMsg());
+        this.code = responseCode.getCode();
+        this.msg = responseCode.getMsg();
+    }
 
-    ResponseCode(String code, String message) {
+    public AppException(String code,String msg){
+        super(msg);
         this.code = code;
-        this.message = message;
+        this.msg = msg;
+    }
+    public String getMsg() {
+        return msg;
     }
 
     public String getCode() {
         return code;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

@@ -13,25 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.request;
+package com.sagacity.framework.api.constant;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
-import java.util.List;
+import sun.tools.tree.Vset;
 
 /**
- * 通用查询实体
+ * 响应码枚举
  * @author xingyun
- * @date 2020-07-04 13:32
+ * @date 2020-07-04 14:17
  */
-@Data
-@ApiModel(description = "通用查询实体")
-public class GeneralConditions {
+public enum ResponseCode {
+    SUCCESS("0000","success"),
+    FAIL("0001","fail"),
+    ERROR("0003","error"),
+    ARGUMENT_EMPTY("0004","参数为空"),
+    ;
 
-    @ApiModelProperty("查询条件列表")
-    private List<Criterion> criteria;
+    private final String code;
+    private final String msg;
 
+    ResponseCode(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 
+    public String getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
 }

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model.response;
+package com.sagacity.framework.api.model.response;
 
-import com.sagacity.framework.web.constant.ResponseCode;
+import com.sagacity.framework.api.constant.ResponseCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,18 +31,18 @@ public class ResponseEntity<T> {
     private String code;
 
     @ApiModelProperty("响应消息")
-    private String message;
+    private String msg;
 
     private T data;
 
     public void ok(){
         this.code = ResponseCode.SUCCESS.getCode();
-        this.message = ResponseCode.SUCCESS.getMessage();
+        this.msg = ResponseCode.SUCCESS.getMsg();
     }
 
     public void fail(){
         this.code = ResponseCode.FAIL.getCode();
-        this.message = ResponseCode.FAIL.getMessage();
+        this.msg = ResponseCode.FAIL.getMsg();
     }
 
     public void fail(String message){

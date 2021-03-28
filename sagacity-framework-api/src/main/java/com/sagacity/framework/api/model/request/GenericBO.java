@@ -13,29 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.model;
+package com.sagacity.framework.api.model.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 /**
- * 请求头封装类
  * @author xingyun
- * @date 2020-07-11 19:39
+ * @date 2020-07-05 13:17
  */
 @Data
-public class UserInfo {
-    /**
-     * 用户姓名
-     */
-    private String name;
+@ApiModel(description = "请求业务实体")
+public class GenericBO {
 
-    /**
-     * 账号
-     */
-    private String account;
+    @ApiModelProperty("id列表")
+    @NotNull(message = "id不能为空")
+    private List<Long> idList;
 
-    /**
-     * traceId
-     */
-    private String traceId;
 }
