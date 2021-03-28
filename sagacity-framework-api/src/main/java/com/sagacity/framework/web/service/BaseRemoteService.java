@@ -19,10 +19,8 @@ import com.github.pagehelper.PageInfo;
 import com.sagacity.framework.web.model.request.GenericBO;
 import com.sagacity.framework.web.model.request.PaginationRequest;
 import com.sagacity.framework.web.model.response.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -93,9 +91,9 @@ public interface BaseRemoteService<T> {
 
     /**
      * 根据 entity 或 generalConditions 条件，分页查询数据 导出
-     * @param entity 分页查询条件 导出
+     * @param paginationRequest 分页查询条件 导出
      */
-    @GetMapping(value = "/export")
-    void export(T entity);
+    @PostMapping(value = "/export")
+    void export(@RequestBody PaginationRequest<T> paginationRequest);
 
 }

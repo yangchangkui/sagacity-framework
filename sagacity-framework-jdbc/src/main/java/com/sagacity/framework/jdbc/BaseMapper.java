@@ -64,7 +64,7 @@ public interface BaseMapper<T> {
     T selectOne(T entity);
 
     /**
-     * 根据 entity 条件，查询一条记录
+     * 根据 entity 条件，查询总数
      *
      * @param entity 实体对象（可以为 null）
      */

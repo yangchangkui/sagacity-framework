@@ -27,6 +27,7 @@ import lombok.Data;
 @Data
 @ApiModel(description = "分页查询请求实体")
 public class PaginationRequest<T> {
+
     @ApiModelProperty("简单查询实体")
     private T entity;
 

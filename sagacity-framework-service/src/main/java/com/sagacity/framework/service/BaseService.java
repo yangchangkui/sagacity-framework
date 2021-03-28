@@ -133,60 +133,42 @@ public abstract class BaseService<M extends BaseMapper<T>,T> implements IService
 
     /**
      * 根据 entity 或 generalConditions 条件，分页查询数据
-     * @param entity 分页查询条件
+     * @param paginationRequest 分页查询条件
      */
-    public void export(T entity) {
-        List<T> list = selectList(entity);
-        ExcelWriter excelWriter = ExcelUtils.getExcelWriter(null);
-        excelWriter.write(list);
-        HttpServletResponse response = RequestUtil.getResponse();
-        // 设置 Excel 响应头
-        setExcelResponseHeaders(response);
-        ServletOutputStream outputStream = null;
-        try {
-            outputStream = response.getOutputStream();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        excelWriter.flush(outputStream,true);
-
+    public void export(PaginationRequest<T> paginationRequest) {
+        PageInfo<T> search = search(paginationRequest);
+        List<T> list = search.getList();
+        ExcelUtils.exportExcel(list,null);
     }
-
-    private void setExcelResponseHeaders(HttpServletResponse response){
-        String fileName = IdClient.nextIdStr() + ExcelUtils.XLSX_SUFFIX;
-        // 下面几行是为了解决文件名乱码的问题
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Cache-Control", "no-cache");
-    }
-
 
     /**
      * 设置默认值
      * @param entity 实体对象
      */
     private void setDefault(T entity, MethodType methodType) {
-        if(MethodType.INSERT.equals(methodType)){
-            // 主键ID
-            ReflectUtil.setFieldValue(entity,"id", IdClient.nextId());
-            // 创建时间、创建人
-            ReflectUtil.setFieldValue(entity,"createTime", DateUtil.date());
-            ReflectUtil.setFieldValue(entity,"createBy", UserInfoUtil.getName());
-        }else if(MethodType.UPDATE.equals(methodType) || MethodType.DELETE.equals(methodType)){
-            // 修改时间、修改人
-            ReflectUtil.setFieldValue(entity,"modifyTime", DateUtil.date());
-            ReflectUtil.setFieldValue(entity,"modifyBy", UserInfoUtil.getName());
+        try{
+            if(MethodType.INSERT.equals(methodType)){
+                // 主键ID
+                ReflectUtil.setFieldValue(entity,"id", IdClient.nextId());
+                // 创建时间、创建人
+                ReflectUtil.setFieldValue(entity,"createTime", DateUtil.date());
+                ReflectUtil.setFieldValue(entity,"createBy", UserInfoUtil.getName());
+            }else if(MethodType.UPDATE.equals(methodType) || MethodType.DELETE.equals(methodType)){
+                // 修改时间、修改人
+                ReflectUtil.setFieldValue(entity,"modifyTime", DateUtil.date());
+                ReflectUtil.setFieldValue(entity,"modifyBy", UserInfoUtil.getName());
+            }
+            // 删除，逻辑删除
+            if(MethodType.DELETE.equals(methodType)){
+                ReflectUtil.setFieldValue(entity,"activeFlag",0);
+            }else{
+                ReflectUtil.setFieldValue(entity,"activeFlag",1);
+            }
+            // traceId
+            ReflectUtil.setFieldValue(entity,"traceId",UserInfoUtil.getTraceId());
+        }catch (Exception e){
+            log.warn("{}设置默认值异常",methodType,e);
         }
-        // 删除，逻辑删除
-        if(MethodType.DELETE.equals(methodType)){
-            ReflectUtil.setFieldValue(entity,"activeFlag",0);
-        }else{
-            ReflectUtil.setFieldValue(entity,"activeFlag",1);
-        }
-        // traceId
-        ReflectUtil.setFieldValue(entity,"traceId",UserInfoUtil.getTraceId());
+
     }
 }

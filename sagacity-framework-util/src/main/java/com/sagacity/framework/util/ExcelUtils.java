@@ -20,6 +20,10 @@ import cn.hutool.poi.excel.ExcelWriter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +44,7 @@ public final class ExcelUtils {
      * @param headerAlias 标题
      * @return ExcelWriter
      */
-    public static ExcelWriter getExcelWriter(Map<String, String> headerAlias) {
+    private static ExcelWriter getExcelWriter(Map<String, String> headerAlias) {
         ExcelWriter writer = ExcelUtil.getBigWriter();
         // 设置标题头
         writer.setHeaderAlias(headerAlias);
@@ -53,4 +57,32 @@ public final class ExcelUtils {
         sheet.setAutoFilter(cellAddresses);
         return writer;
     }
+
+    public static <T> void exportExcel(List<T> tList,Map<String, String> headerAlias){
+        ExcelWriter excelWriter = ExcelUtils.getExcelWriter(headerAlias);
+        excelWriter.write(tList);
+        HttpServletResponse response = RequestUtil.getResponse();
+        // 设置 Excel 响应头
+        setExcelResponseHeaders(response);
+        ServletOutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        excelWriter.flush(outputStream,true);
+    }
+
+
+    private static void setExcelResponseHeaders(HttpServletResponse response){
+        String fileName = IdClient.nextIdStr() + ExcelUtils.XLSX_SUFFIX;
+        // 下面几行是为了解决文件名乱码的问题
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+    }
+
 }

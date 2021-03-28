@@ -22,6 +22,7 @@
         <module>sagacity-framework-service</module>
         <module>sagacity-framework-util</module>
         <module>sagacity-framework-web</module>
+        <module>sagacity-framework-test</module>
     </modules>
 
     <properties>

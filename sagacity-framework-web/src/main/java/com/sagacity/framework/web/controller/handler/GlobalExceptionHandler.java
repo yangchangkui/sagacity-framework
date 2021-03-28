@@ -21,13 +21,14 @@ import com.sagacity.framework.web.model.response.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理类
  * @author xingyun
  * @date 2020-07-12 21:53
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
 
             // 其他类型异常
         }else{
-            resp.fail();
+            resp.fail(e.getCause().getMessage());
         }
         return resp;
     }

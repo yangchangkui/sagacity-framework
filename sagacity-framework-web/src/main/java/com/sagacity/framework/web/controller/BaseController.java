@@ -21,6 +21,7 @@ import com.sagacity.framework.web.model.request.GenericBO;
 import com.sagacity.framework.web.model.request.PaginationRequest;
 import com.sagacity.framework.web.model.response.ResponseEntity;
 import com.sagacity.framework.web.service.BaseRemoteService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,6 +37,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
     @Autowired
     protected S service;
 
+    @ApiOperation("新增接口")
     @Override
     public ResponseEntity<Integer> insert(@RequestBody T entity) {
         ResponseEntity<Integer> resp = new ResponseEntity<>();
@@ -43,6 +45,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("根据ID删除接口")
     @Override
     public ResponseEntity<Integer> deleteById(@RequestBody T entity) {
         ResponseEntity<Integer> resp = new ResponseEntity<>();
@@ -50,6 +53,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("根据ID更新接口")
     @Override
     public ResponseEntity<Integer> updateById(@RequestBody T entity) {
         ResponseEntity<Integer> resp = new ResponseEntity<>();
@@ -57,6 +61,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("根据ID查询接口")
     @Override
     public ResponseEntity<T> getById(Long id) {
         ResponseEntity<T> resp = new ResponseEntity<>();
@@ -64,6 +69,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("根据ID列表查询接口")
     @Override
     public ResponseEntity<List<T>> getByIds(@RequestBody GenericBO genericBO) {
         ResponseEntity<List<T>> resp = new ResponseEntity<>();
@@ -71,6 +77,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("根据条件查询单条数据接口")
     @Override
     public ResponseEntity<T> get(@RequestBody T entity) {
         ResponseEntity<T> resp = new ResponseEntity<>();
@@ -78,6 +85,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("列表查询接口")
     @Override
     public ResponseEntity<List<T>> list(@RequestBody T entity) {
         ResponseEntity<List<T>> resp = new ResponseEntity<>();
@@ -85,6 +93,7 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("通用分页查询接口")
     @Override
     public ResponseEntity<PageInfo<T>> search(@RequestBody PaginationRequest<T> paginationRequest) {
         ResponseEntity<PageInfo<T>> resp = new ResponseEntity<>();
@@ -92,9 +101,10 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
         return resp;
     }
 
+    @ApiOperation("导出数据接口")
     @Override
-    public void export(T entity) {
-        service.export(entity);
+    public void export(@RequestBody PaginationRequest<T> paginationRequest) {
+        service.export(paginationRequest);
     }
 
 
