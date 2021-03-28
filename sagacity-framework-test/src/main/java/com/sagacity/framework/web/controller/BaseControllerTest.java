@@ -22,4 +22,5 @@ package com.sagacity.framework.web.controller;
  */
 public abstract class BaseControllerTest {
 
+
 }
