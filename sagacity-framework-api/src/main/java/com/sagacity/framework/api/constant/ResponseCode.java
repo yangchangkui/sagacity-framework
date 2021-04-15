@@ -15,8 +15,6 @@
  */
 package com.sagacity.framework.api.constant;
 
-import sun.tools.tree.Vset;
-
 /**
  * 响应码枚举
  * @author xingyun

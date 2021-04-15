@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sagacity.framework.web.service;
+package com.sagacity.framework.api.service;
 
 import com.github.pagehelper.PageInfo;
-import com.sagacity.framework.web.model.request.GenericBO;
-import com.sagacity.framework.web.model.request.PaginationRequest;
-import com.sagacity.framework.web.model.response.ResponseEntity;
+import com.sagacity.framework.api.model.request.GenericBO;
+import com.sagacity.framework.api.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.response.ResponseEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

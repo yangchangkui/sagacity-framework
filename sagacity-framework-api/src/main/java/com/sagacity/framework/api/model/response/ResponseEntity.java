@@ -47,7 +47,7 @@ public class ResponseEntity<T> {
 
     public void fail(String message){
         this.code = ResponseCode.FAIL.getCode();
-        this.message = message;
+        this.msg = message;
     }
 
     public ResponseEntity<T> setData(T data){

@@ -26,7 +26,7 @@ import com.sagacity.framework.util.ExcelUtils;
 import com.sagacity.framework.util.IdClient;
 import com.sagacity.framework.util.RequestUtil;
 import com.sagacity.framework.util.UserInfoUtil;
-import com.sagacity.framework.web.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.request.PaginationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
