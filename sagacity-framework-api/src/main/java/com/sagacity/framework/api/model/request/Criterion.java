@@ -34,18 +34,33 @@ public class Criterion {
     @ApiModelProperty("字段")
     private String field;
 
+    /**
+     * 字段值
+     */
     @ApiModelProperty("字段值")
     private Object value;
 
+    /**
+     * 查询条件
+     */
     @ApiModelProperty("条件（>、>=、in、like等）")
     private String condition;
 
+    /**
+     * 前缀 （
+     */
     @ApiModelProperty("前缀")
     private String prefix = ApiConstants.CRITERION_PREFIX;
 
+    /**
+     * 后缀
+     */
     @ApiModelProperty("后缀")
     private String suffix = ApiConstants.CRITERION_SUFFIX;
 
+    /**
+     * 关联
+     */
     @ApiModelProperty("条件关联（OR、AND）")
     private String connect;
 }

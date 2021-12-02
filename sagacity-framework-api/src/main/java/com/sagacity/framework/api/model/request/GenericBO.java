@@ -19,19 +19,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
+ * 分页查询请求实体
  * @author xingyun
- * @date 2020-07-05 13:17
+ * @date 2020-07-04 13:19
  */
 @Data
-@ApiModel(description = "请求业务实体")
-public class GenericBO {
+@ApiModel(description = "分页查询请求实体")
+public class GenericBO<T> {
+    @ApiModelProperty("简单查询实体")
+    private T entity;
 
-    @ApiModelProperty("id列表")
-    @NotNull(message = "id不能为空")
-    private List<Long> idList;
+    @ApiModelProperty("通用查询实体")
+    private GeneralConditions conditions;
 
+    @ApiModelProperty("页数")
+    private int pageNum;
+
+    @ApiModelProperty("每页条数")
+    private int pageSize;
 }

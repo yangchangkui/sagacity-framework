@@ -16,15 +16,15 @@
 package com.sagacity.framework.api.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.sagacity.framework.service.IService;
 import com.sagacity.framework.api.model.request.GenericBO;
-import com.sagacity.framework.api.model.request.PaginationRequest;
+import com.sagacity.framework.service.IService;
 import com.sagacity.framework.api.model.response.ResponseEntity;
 import com.sagacity.framework.api.service.BaseRemoteService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -63,17 +63,17 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
 
     @ApiOperation("根据ID查询接口")
     @Override
-    public ResponseEntity<T> getById(Long id) {
-        ResponseEntity<T> resp = new ResponseEntity<>();
+    public ResponseEntity<T> getById(Serializable id) {
+        ResponseEntity<T> resp = ResponseEntity.create();
         resp.setData(service.selectById(id)).ok();
         return resp;
     }
 
     @ApiOperation("根据ID列表查询接口")
     @Override
-    public ResponseEntity<List<T>> getByIds(@RequestBody GenericBO genericBO) {
+    public ResponseEntity<List<T>> getByIds(@RequestBody List<Serializable> idList) {
         ResponseEntity<List<T>> resp = new ResponseEntity<>();
-        resp.setData(service.selectBatchIds(genericBO.getIdList())).ok();
+        resp.setData(service.selectBatchIds(idList)).ok();
         return resp;
     }
 
@@ -95,16 +95,16 @@ public class BaseController<S extends IService<T>,T> implements BaseRemoteServic
 
     @ApiOperation("通用分页查询接口")
     @Override
-    public ResponseEntity<PageInfo<T>> search(@RequestBody PaginationRequest<T> paginationRequest) {
+    public ResponseEntity<PageInfo<T>> search(@RequestBody GenericBO<T> bo) {
         ResponseEntity<PageInfo<T>> resp = new ResponseEntity<>();
-        resp.setData(service.search(paginationRequest)).ok();
+        resp.setData(service.search(bo)).ok();
         return resp;
     }
 
     @ApiOperation("导出数据接口")
     @Override
-    public void export(@RequestBody PaginationRequest<T> paginationRequest) {
-        service.export(paginationRequest);
+    public void export(@RequestBody GenericBO<T> bo) {
+        service.export(bo);
     }
 
 

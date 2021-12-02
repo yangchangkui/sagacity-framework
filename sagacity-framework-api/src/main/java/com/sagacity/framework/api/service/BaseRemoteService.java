@@ -17,11 +17,11 @@ package com.sagacity.framework.api.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sagacity.framework.api.model.request.GenericBO;
-import com.sagacity.framework.api.model.request.PaginationRequest;
 import com.sagacity.framework.api.model.response.ResponseEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -57,14 +57,14 @@ public interface BaseRemoteService<T> {
      * @param id 主键ID
      */
     @GetMapping(value = "/getById/{id}")
-    ResponseEntity<T> getById(@PathVariable("id") Long id);
+    ResponseEntity<T> getById(@PathVariable("id") Serializable id);
 
     /**
      * 查询（根据ID 批量查询）
-     * @param genericBO 包含 idList 主键ID列表(不能为 null 以及 empty)
+     * @param idList 包含 idList 主键ID列表(不能为 null 以及 empty)
      */
-    @PostMapping(value = "/getByIds")
-    ResponseEntity<List<T>> getByIds(@RequestBody GenericBO genericBO);
+    @GetMapping(value = "/getByIds")
+    ResponseEntity<List<T>> getByIds(List<Serializable> idList);
 
     /**
      * 根据 entity 条件，查询一条记录
@@ -84,16 +84,16 @@ public interface BaseRemoteService<T> {
 
     /**
      * 根据 entity 或 generalConditions 条件，分页查询数据
-     * @param paginationRequest 分页查询条件
+     * @param bo 分页查询条件
      */
     @PostMapping(value = "/search")
-    ResponseEntity<PageInfo<T>> search(@RequestBody PaginationRequest<T> paginationRequest);
+    ResponseEntity<PageInfo<T>> search(@RequestBody GenericBO<T> bo);
 
     /**
      * 根据 entity 或 generalConditions 条件，分页查询数据 导出
-     * @param paginationRequest 分页查询条件 导出
+     * @param bo 分页查询条件 导出
      */
     @PostMapping(value = "/export")
-    void export(@RequestBody PaginationRequest<T> paginationRequest);
+    void export(@RequestBody GenericBO<T> bo);
 
 }

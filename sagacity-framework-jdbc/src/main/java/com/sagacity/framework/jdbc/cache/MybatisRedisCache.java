@@ -28,7 +28,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class MybatisRedisCache implements Cache {
 
-    private String id;
+    private final String id;
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
@@ -68,7 +68,11 @@ public class MybatisRedisCache implements Cache {
 
     @Override
     public int getSize() {
-        return Math.toIntExact(redisTemplate.boundHashOps(id).size());
+        Long size = redisTemplate.boundHashOps(id).size();
+        if(size != null){
+            return Math.toIntExact(size);
+        }
+        return 0;
     }
 
     @Override

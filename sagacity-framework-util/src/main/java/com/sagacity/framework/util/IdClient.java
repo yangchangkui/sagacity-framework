@@ -30,7 +30,7 @@ import java.net.NetworkInterface;
 @Slf4j
 public class IdClient {
 
-    private static IdWorker idWorker = new IdWorker(getMaxWorkerId());
+    private static final IdWorker idWorker = new IdWorker(getMaxWorkerId());
 
     /**
      * 下个ID，默认12开头

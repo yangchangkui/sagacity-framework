@@ -23,9 +23,8 @@ import com.sagacity.framework.api.constant.ResponseCode;
  * @date 2020-10-19 15:36
  */
 public class AppException extends RuntimeException {
-    private String code;
-    private String msg;
-
+    private final String code;
+    private final String msg;
     public AppException(ResponseCode responseCode){
         super(responseCode.getMsg());
         this.code = responseCode.getCode();

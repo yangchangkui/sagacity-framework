@@ -21,20 +21,29 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
+ * 响应对象
  * @author xingyun
  * @date 2020-07-04 14:13
  */
 @Data
 @ApiModel(description = "响应对象")
 public class ResponseEntity<T> {
+
     @ApiModelProperty("响应码")
     private String code;
 
     @ApiModelProperty("响应消息")
     private String msg;
 
+    @ApiModelProperty("数据")
     private T data;
 
+    @ApiModelProperty("追踪ID（记录请求）")
+    private String traceId;
+
+    public static <T> ResponseEntity<T> create(){
+        return new ResponseEntity<>();
+    }
     public void ok(){
         this.code = ResponseCode.SUCCESS.getCode();
         this.msg = ResponseCode.SUCCESS.getMsg();

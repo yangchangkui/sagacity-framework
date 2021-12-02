@@ -16,8 +16,9 @@
 package com.sagacity.framework.service;
 
 import com.github.pagehelper.PageInfo;
-import com.sagacity.framework.api.model.request.PaginationRequest;
+import com.sagacity.framework.api.model.request.GenericBO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -49,13 +50,13 @@ public interface IService<T> {
      * 根据 ID 查询
      * @param id 主键ID
      */
-    T selectById(Long id);
+    T selectById(Serializable id);
 
     /**
      * 查询（根据ID 批量查询）
      * @param idList 主键ID列表(不能为 null 以及 empty)
      */
-    List<T> selectBatchIds(List<Long> idList);
+    List<T> selectBatchIds(List<Serializable> idList);
 
     /**
      * 根据 entity 条件，查询一条记录
@@ -80,14 +81,14 @@ public interface IService<T> {
 
     /**
      * 根据 entity 或 generalConditions 条件，分页查询数据
-     * @param paginationRequest 分页查询条件
+     * @param bo 分页查询条件
      */
-    PageInfo<T> search(PaginationRequest<T> paginationRequest);
+    PageInfo<T> search(GenericBO<T> bo);
 
 
     /**PaginationRequest
      * 根据 entity 或 generalConditions 条件，分页查询数据 导出
-     * @param paginationRequest 分页查询条件 导出
+     * @param bo 分页查询条件 导出
      */
-    void export(PaginationRequest<T> paginationRequest);
+    void export(GenericBO<T> bo);
 }

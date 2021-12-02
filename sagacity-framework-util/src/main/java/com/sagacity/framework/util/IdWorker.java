@@ -64,13 +64,15 @@ public final class IdWorker {
 
     private long tilNextMillis(long lastTimestamp) {
         long timestamp;
-        for(timestamp = this.currentTimeMillis(); timestamp <= lastTimestamp; timestamp = this.currentTimeMillis());
+        timestamp = this.currentTimeMillis();
+        while (timestamp <= lastTimestamp) {
+            timestamp = this.currentTimeMillis();
+        }
         return timestamp;
     }
 
     /**
      * 获取当前时间毫秒
-     * @return
      */
     private long currentTimeMillis() {
         return System.currentTimeMillis();

@@ -44,7 +44,7 @@ public final class ExcelUtils {
      * @param headerAlias 标题
      * @return ExcelWriter
      */
-    private static ExcelWriter getExcelWriter(Map<String, String> headerAlias) {
+    public static ExcelWriter getExcelWriter(Map<String, String> headerAlias) {
         ExcelWriter writer = ExcelUtil.getBigWriter();
         // 设置标题头
         writer.setHeaderAlias(headerAlias);

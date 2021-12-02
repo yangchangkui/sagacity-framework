@@ -16,15 +16,21 @@
 package com.sagacity.framework.api.constant;
 
 /**
- * 响应码枚举
+ * <p>
+ *    响应码枚举
+ *    1.2000-3000 请求成功使用
+ *    2.4000-5000 错误请求使用（参数）
+ *    3.5000-6000 服务异常使用
+ *    4.6000-7000 结果异常使用
+ * </p>
  * @author xingyun
  * @date 2020-07-04 14:17
  */
 public enum ResponseCode {
-    SUCCESS("0000","success"),
-    FAIL("0001","fail"),
-    ERROR("0003","error"),
-    ARGUMENT_EMPTY("0004","参数为空"),
+    SUCCESS("2000","success"),
+    FAIL("4000","错误请求"),
+    ERROR("5000","服务异常"),
+    ARGUMENT_EMPTY("4001","参数为空"),
     ;
 
     private final String code;
